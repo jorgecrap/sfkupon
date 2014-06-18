@@ -353,4 +353,8 @@ class Usuario {
         return $this->getNombre();
     }
 
+    public function __construct() {
+        $this->fecha_alta = new \DateTime();
+    }
+
 }
