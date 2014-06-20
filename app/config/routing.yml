@@ -19,6 +19,11 @@ _paginas_estaticas:
     prefix: /pagina
     defaults: { _controller: FrameworkBundle:Template:template }
     
-portada:
+   
+_portada:
     path: /
+    defaults: { _controller: FrameworkBundle:Redirect:redirect, route: portada, ciudad: '%cupon.ciudad_por_defecto%' }
+    
+portada:
+    path: /{ciudad}
     defaults: { _controller: OfertaBundle:Default:portada }
