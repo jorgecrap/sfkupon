@@ -17,43 +17,45 @@
             </header>
             <article class="oferta">
                 <section class="descripcion">
-                    <h1><a href="#"> ## NOMBRE DE LA OFERTA ## </a></h1>
-                    ## DESCRIPCIÓN DE LA OFERTA ##
+                    <h1><a href="#">{{ oferta.nombre }}</a></h1>
+                        {{ oferta.descripcion }}
                     <a class="boton" href="#">Comprar</a>
                 </section>
                 <section class="galeria">
-                    <img alt="Fotografía de la oferta" src="#">
-                    <p class="precio">## PRECIO ## &euro;
-                        <span>## DESCUENTO ##</span></p>
-                    <p><strong>Condiciones:</strong> ## CONDICIONES ##</p>
+                    <img alt="Fotografía de la oferta" src="{{ asset('uploads/images/' ~ oferta.rutaFoto) }}">
+                    <p class="precio">{{ oferta.precio }} &euro; <span>{{ oferta.descuento}}</span></p>
+                    <p><strong>Condiciones:</strong> {{ oferta.condiciones }}</p>
                 </section>
+
                 <section class="estado">
                     <div class="tiempo">
-                        <strong>Faltan</strong>: ## FECHA DE EXPIRACIÓN ##
+                        <strong>Fecha de expiración : </strong>: {{ oferta.fechaExpiracion | date() }}
                     </div>
                     <div class="compras">
-                        <strong>Compras</strong>: ## COMPRAS TOTALES ##
+                        <strong>Compras</strong>: {{ oferta.compras }}
                     </div>
                     <div class="faltan">
-
-                        {# Si las compras no llegan al umbral mínimo establecido #}
-                        Faltan <strong>## NN ## compras</strong> <br/>
-                        para activar la oferta
-                        {# Si las compras superan el umbral mínimo establecido #}
-                        <strong>Oferta activada</strong> por superar las
-                        <strong>## NN ##</strong> compras necesarias
+                        {% set faltan = oferta.umbral - oferta.compras %}
+                        {% if faltan > 0 %}
+                            Faltan <strong>{{ faltan }} compras</strong> <br/>
+                            para activar la oferta
+                        {% else %}
+                            <strong>Oferta activada</strong> por superar las
+                            <strong>{{ oferta.umbral }}</strong> compras necesarias
+                        {% endif %}
                     </div>
                 </section>
+
                 <section class="direccion">
                     <h2>Disfruta de la oferta en</h2>
                     <p>
-                        <a href="#">## NOMBRE DE LA TIENDA ##</a>
-                        ## DIRECCION DE LA TIENDA ##
+                        <a href="#">{{ oferta.tienda.nombre }}</a>
+                        {{ oferta.tienda.direccion }}
                     </p>
                 </section>
                 <section class="tienda">
                     <h2>Sobre la tienda</h2>
-                    ## DESCRIPCION DE LA TIENDA ##
+                    {{ oferta.tienda.descripcion }}
                 </section>
             </article>
             <aside>
@@ -65,7 +67,7 @@
             </aside>
             <footer>
                 &copy; {{ 'now' | date('Y') }} - Cupon
-                
+
                 <a href="{{ path('pagina_ayuda' ) }}">
                     Ayuda
                 </a>

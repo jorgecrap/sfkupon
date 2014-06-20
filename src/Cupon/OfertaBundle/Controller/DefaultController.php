@@ -10,10 +10,14 @@ class DefaultController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         
+        $fecha = new \DateTime();
+        $fecha->setTime(23,59,59);
+        
         $oferta = $em->getRepository('OfertaBundle:Oferta')->findOneBy(array(
             'ciudad' => 1,
-            'fechaPublicacion' => new \DateTime('today')
+            'fechaPublicacion' => $fecha
         ));
+        
         return $this->render(
                         'OfertaBundle:Default:portada.html.twig',
                         array('oferta' => $oferta)
