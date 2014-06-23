@@ -14,12 +14,14 @@ oferta:
     resource: "@OfertaBundle/Resources/config/routing.yml"
     prefix:   /
 
-_paginas_estaticas:
-    resource: routing_paginas.yml
-    prefix: /pagina
-    defaults: { _controller: FrameworkBundle:Template:template }
+pagina_estatica:
+    path: /sitio/{pagina}
+    defaults: { _controller: OfertaBundle:Sitio:estatica }
     
-   
+_pagina_estatica:
+    path: /sitio/{pagina}/
+    defaults: { _controller: FrameworkBundle:Redirect:redirect,route: pagina_estatica }
+    
 _portada:
     path: /
     defaults: { _controller: FrameworkBundle:Redirect:redirect, route: portada, ciudad: '%cupon.ciudad_por_defecto%' }
@@ -27,3 +29,15 @@ _portada:
 portada:
     path: /{ciudad}
     defaults: { _controller: OfertaBundle:Default:portada }
+
+detalle_oferta:
+    path: /{ciudad}/ofertas/{slug}
+    defaults: { _controller: OfertaBundle:Default:oferta }
+    requirements:
+        slug: .+
+
+ciudad_cambiar:
+    path: /ciudad/cambiar-a-{ciudad}
+    defaults: { _controller: CiudadBundle:Default:cambiar }
+    requirements:
+        ciudad: .+

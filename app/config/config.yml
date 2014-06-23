@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -28,6 +29,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        ciudad_por_defecto: "%cupon.ciudad_por_defecto%"
 
 # Assetic Configuration
 assetic:
@@ -71,3 +74,4 @@ swiftmailer:
 # Parametros propios
 parameters:
     cupon.ciudad_por_defecto: "barcelona"
+    

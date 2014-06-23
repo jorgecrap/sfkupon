@@ -24,5 +24,19 @@ class DefaultController extends Controller {
                 'OfertaBundle:Default:portada.html.twig', array('oferta' => $oferta)
         );
     }
+    
+    public function ofertaAction($slug,$ciudad){
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $oferta = $em->getRepository('OfertaBundle:Oferta')->findOferta($slug,$ciudad);
+        
+        $relacionadas = $em->getRepository('OfertaBundle:Oferta')->findRelacionadas($ciudad);
+        
+        return $this->render('OfertaBundle:Default:detalle.html.twig', array(
+                'oferta' => $oferta,
+                'relacionadas' => $relacionadas
+                ));
+    }
 
 }
