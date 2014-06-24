@@ -72,7 +72,8 @@ class CuponExtension extends \Twig_Extension {
                     + (segundos < 10 ? '0' + segundos : segundos) + 's ';
                    setTimeout('muestraCuentaAtras()', 1000);
                 }document.getElementById('tiempo').innerHTML = '<strong>Faltan:</strong> ' + cuentaAtras;
-            }muestraCuentaAtras();</script>
+            }
+                muestraCuentaAtras();</script>
 EOJ;
                 
         return $html;
