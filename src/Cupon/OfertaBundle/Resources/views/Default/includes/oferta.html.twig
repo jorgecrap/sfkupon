@@ -7,14 +7,14 @@
 
 </section>
 <section class="galeria">
-    <img alt="Fotografía de la oferta" src="{{ asset('uploads/images/' ~oferta.rutaFoto) }}">
+    <img alt="Fotografía de la oferta" src="{{ asset(directorio_imagenes ~oferta.rutaFoto) }}">
     <p class="precio">{{ oferta.precio }} &euro;<span>{{ descuento(oferta.precio, oferta.descuento) }}</span></p>
     <p><strong>Condiciones:</strong> {{ oferta.condiciones }}</p>
 </section>
 <section class="estado">
     <section class="estado {{ expirada ? 'expirada' : '' }}">
         {% if not expirada %}
-            <div class="tiempo">
+            <div id="tiempo">
                 <strong>Faltan</strong>: {{ oferta.fechaExpiracion | cuenta_atras }}
             </div>
             <div class="compras">
